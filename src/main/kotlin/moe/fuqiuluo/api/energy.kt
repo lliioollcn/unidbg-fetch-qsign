@@ -25,7 +25,7 @@ fun Routing.energy() {
         val salt = fetchGet("salt")!!.hex2ByteArray()
 
         val session = initSession(uin) ?: run {
-            val androidId = fetchGet("android_id", def = "")
+            val androidId = fetchGet("android_id", def = Crypt.AndroidId)
             val guid = fetchGet("guid", def = "")
             if (androidId.isNullOrEmpty() || guid.isNullOrEmpty()) {
                 throw MissingKeyError
@@ -49,7 +49,7 @@ fun Routing.energy() {
         val guid = fetchGet("guid", err = "lack of guid") ?: return@get
 
         val session = initSession(uin) ?: run {
-            val androidId = fetchGet("android_id", def = "")
+            val androidId = fetchGet("android_id", def = Crypt.AndroidId)
             if (androidId.isNullOrEmpty() || guid.isEmpty()) {
                 throw MissingKeyError
             }
@@ -142,7 +142,7 @@ fun Routing.energy() {
     get("/energy") {
         val uin = fetchGet("uin")!!.toLong()
         val session = initSession(uin) ?: run {
-            val androidId = fetchGet("android_id", def = "")
+            val androidId = fetchGet("android_id", def = Crypt.AndroidId)
             val guid = fetchGet("guid", def = "")
             if (androidId.isNullOrEmpty() || guid.isNullOrEmpty()) {
                 throw MissingKeyError

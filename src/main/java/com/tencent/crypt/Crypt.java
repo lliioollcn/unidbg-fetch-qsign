@@ -1,5 +1,7 @@
 package com.tencent.crypt;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Random;
 
@@ -28,6 +30,8 @@ public class Crypt {
     private static final Random random = new Random();
     // 字节输出流
     private final ByteArrayOutputStream bas;
+    @Nullable
+    public static final String AndroidId = "576b7627026d9174";
 
     /**
      * 构造函数

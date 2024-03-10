@@ -30,7 +30,8 @@ private val API_LIST = arrayOf(
 
 fun main(args: Array<String>) {
     args().also {
-        val baseDir = File(it["basePath", "Lack of basePath."]).also {
+        val dir = it.getOrDefault("basePath", "./txlib/9.0.20")
+        val baseDir = File(dir).also {
             BASE_PATH = it
         }
         if (!baseDir.exists() ||
@@ -51,7 +52,7 @@ fun main(args: Array<String>) {
     }
     CONFIG.server.also {
         embeddedServer(Netty, host = it.host, port = it.port, module = Application::init)
-        .start(wait = true)
+            .start(wait = true)
     }
 
 }

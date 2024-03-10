@@ -3,6 +3,7 @@
 package moe.fuqiuluo.api
 
 import CONFIG
+import com.tencent.crypt.Crypt
 import com.tencent.mobileqq.channel.SsoPacket
 import com.tencent.mobileqq.sign.QQSecuritySign
 import io.ktor.server.application.*
@@ -24,7 +25,7 @@ fun Routing.sign() {
         val buffer = fetchGet("buffer")!!.hex2ByteArray()
         val qimei36 = fetchGet("qimei36", def = "")!!
 
-        val androidId = fetchGet("android_id", def = "")!!
+        val androidId = fetchGet("android_id", def = Crypt.AndroidId)!!
         val guid = fetchGet("guid", def = "")!!
 
         requestSign(cmd, uin, qua, seq, buffer, qimei36, androidId, guid)
@@ -39,7 +40,7 @@ fun Routing.sign() {
         val buffer = fetchPost(param, "buffer")!!.hex2ByteArray()
         val qimei36 = fetchPost(param, "qimei36", def = "")!!
 
-        val androidId = param["android_id"] ?: ""
+        val androidId = param["android_id"] ?: Crypt.AndroidId
         val guid = param["guid"] ?: ""
 
         requestSign(cmd, uin, qua, seq, buffer, qimei36, androidId, guid)
