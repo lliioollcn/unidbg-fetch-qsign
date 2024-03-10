@@ -343,6 +343,9 @@ class QSecJni(
         if (signature == "android/content/Context->getPackageName()Ljava/lang/String;") {
             return StringObject(vm, "com.tencent.mobileqq")
         }
+        if (signature == "android/content/ContentResolver->acquireContentProviderClient(Ljava/lang/String;)Landroid/content/ContentProviderClient;") {
+            return vm.resolveClass("android/content/ContentProviderClient").newObject(null)
+        }
         if (signature == "java/lang/ClassLoader->loadClass(Ljava/lang/String;)Ljava/lang/Class;") {
             val name = vaList.getObjectArg<StringObject>(0).value
             val loader = dvmObject.value as ClassLoader

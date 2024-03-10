@@ -32,6 +32,9 @@ fun main(args: Array<String>) {
         val baseDir = File(it["basePath", "Lack of basePath."]).also {
             BASE_PATH = it
         }
+
+        //val baseDir = File("./txlib/9.0.20")
+        BASE_PATH = baseDir
         if (!baseDir.exists() ||
             !baseDir.isDirectory ||
             !baseDir.resolve("libfekit.so").exists() ||
@@ -51,7 +54,7 @@ fun main(args: Array<String>) {
     }
     CONFIG.server.also {
         embeddedServer(Netty, host = it.host, port = it.port, module = Application::init)
-        .start(wait = true)
+            .start(wait = true)
     }
 
 }

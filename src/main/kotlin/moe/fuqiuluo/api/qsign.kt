@@ -1,4 +1,4 @@
-@file:Suppress("UNCHECKED_CAST")
+ @file:Suppress("UNCHECKED_CAST")
 
 package moe.fuqiuluo.api
 
@@ -24,9 +24,8 @@ fun Routing.sign() {
         val buffer = fetchGet("buffer")!!.hex2ByteArray()
         val qimei36 = fetchGet("qimei36", def = "")!!
 
-        val androidId = fetchGet("android_id", def = "")!!
+        val androidId = fetchGet("android_id", def = "576b7627026d9174")!!
         val guid = fetchGet("guid", def = "")!!
-
         requestSign(cmd, uin, qua, seq, buffer, qimei36, androidId, guid)
     }
 
@@ -39,7 +38,7 @@ fun Routing.sign() {
         val buffer = fetchPost(param, "buffer")!!.hex2ByteArray()
         val qimei36 = fetchPost(param, "qimei36", def = "")!!
 
-        val androidId = param["android_id"] ?: ""
+        val androidId = param["android_id"] ?: "576b7627026d9174"
         val guid = param["guid"] ?: ""
 
         requestSign(cmd, uin, qua, seq, buffer, qimei36, androidId, guid)

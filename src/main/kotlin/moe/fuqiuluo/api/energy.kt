@@ -23,7 +23,7 @@ fun Routing.energy() {
         val salt = fetchGet("salt")!!.hex2ByteArray()
 
         val session = initSession(uin) ?: run {
-            val androidId = fetchGet("android_id", def = "")
+            val androidId = fetchGet("android_id", def = "576b7627026d9174")
             val guid = fetchGet("guid", def = "")
             if (androidId.isNullOrEmpty() || guid.isNullOrEmpty()) {
                 throw MissingKeyError
@@ -41,12 +41,13 @@ fun Routing.energy() {
     get("/energy") {
         val uin = fetchGet("uin")!!.toLong()
         val session = initSession(uin) ?: run {
-            val androidId = fetchGet("android_id", def = "")
+            val androidId = fetchGet("android_id", def = "576b7627026d9174")
             val guid = fetchGet("guid", def = "")
-            if (androidId.isNullOrEmpty() || guid.isNullOrEmpty()) {
+            if ( guid.isNullOrEmpty()) {
                 throw MissingKeyError
             }
-            SessionManager.register(EnvData(uin, androidId, guid.lowercase(), "", CONFIG.protocol.qua, CONFIG.protocol.version, CONFIG.protocol.code))
+            SessionManager.register(EnvData(uin,
+                androidId!!, guid.lowercase(), "", CONFIG.protocol.qua, CONFIG.protocol.version, CONFIG.protocol.code))
             findSession(uin)
         }
 
